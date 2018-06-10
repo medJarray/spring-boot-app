@@ -10,15 +10,20 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Table(name = "Employeur")
 public class Employeur {
 
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "firstName")
     private String firstName;
+    @Column(name = "lastName")
     private String lastName;
+    @Column(name = "matricule")
     private String matricule;
+    @Column(name = "nbrTichet")
     private int nbrTicketEnCharge;
 
     @JsonIgnore

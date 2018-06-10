@@ -1,0 +1,26 @@
+language: java
+jdk: oraclejdk8
+sudo: false
+dist: trusty
+install: true
+addons:
+  sonarcloud:
+    organization: raouf25-github
+    token:
+      secure: Pkzx1QtBFitYca4yvzVVVbxn+7GvVXF+ahg/ace2pIkU1fAZhBdU6pBLU31J4ZA7MUZy64QVvouGu/q/5Dj6f90EckewI6FzIJ14PXUhTppm2ngcvDwK5IwhVcWeVWG/Yon/ZqTlSQhh8ue3uKbwLgALRKBkiX4f2L+dKAYKTaP+wek/rk6SVi96KpWQgzy46LmF9r4xk3JeMUQOEPUcyHV6v38rBVoU5CSQTsXAmlUrn/DDupx1qBJjTrU80W3GelaygRmbIb1nT2nS6OeLk0QDDeHe+YbqkjLQlkqW3JHoMTPV1blCVkqnTZIeI6HGpxreJJlvw83d+DlgZLmEnd4WVO9uvWr8rK1+/x73iX0Zp51iOr5fSNrCpp39ui3hunpHLAfhIFiguCSmBbvFzSCyrZq0+chHFMNZo3uhVrUiK71yr0ebzrWPTn1r+EzBBL8GYzYip2cuT1W4P00AR4XhG24cA7wxT0vjQMFH4bt7Rb23aR3w/5Yv+dD0LJj6E0SE36X0LFg3qhZIBlfJ2LGS+OhvAOsXSM20HMJHaglRx5NCMGwCLxPqDQBzpRWeN31CbgXDR3qOXTrBjGx3sIeCbHnCsKbvAmpqcsTJmzYJTmbXjNcFiyl8ZWAK4XuAN+3cUDKLB2aYl+cDVeA+F9L4l6J7VmXgvd4BzAlkptk=
+script:
+- mvn clean package sonar:sonar
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.sonar/cache"
+before_install:
+- chmod +x mvnw
+notifications:
+  email:
+    recipients:
+    - makhlouf.raouf+travis@gmail.com
+    on_failure: always
+env:
+  global:
+    secure: R3M1RjRrR6nwIry/jX9M/9TlKLgWQeBFBxFCh83aGmaIPFmxS4oJucE8qDHha9h3JMgKHjoYogTfSjrLPVK5REmNToFQ9/+ktyCWjyPxxSxvLKkNyPRXmdWwI2mL8WaNh7wKUrHzrX4MGGOkONs0LSTY3sQAut7AoGkZt4mAcTKcjirLQId1DkyWOrD2pqxQIZmQJOvyqQaH5+Bqptd865sbqNbL688n2sdf/ldWBDHA7lgitis11b84yEg9nA21KBhyVlz4Q1hO95W//EZhmd5HQvfgWGwFkshRgDuRgx2bLb2/HU/c6eTgWkVDP2LJfVvrAu8F8doVSmmR3Rka8hllxhBx0OazJfNaeVDkMT5T+cmq/v6al6NKzUm5Hiwv2L5qLWrzjavmu91cphWPIJXieyEp3Ifq6Ifj28G/ief2GtnKWfvHzBglt0cQ5iwgkLCBT8ngfPU4kr9iwLVBvMDwLPuG1V50AICqdXIjV2Cr99TQ9FXd/gK03q9nTW6KfCDWmqqAlOVxsgoaAQGJzOxOocyfG/u2ngNnldRf+F//8MroY5nBEXKcf0h/WdxblF4m0GBO7LwrUSjKCCkMgmYF8aTvhSUW+j88beqY6poHdkII0X0TM2WQTicny6neomfX2IG07H4LV15MxvaYU40YgUOveIIxmD1pbYAoZTE=
