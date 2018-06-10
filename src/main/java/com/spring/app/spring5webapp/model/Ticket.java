@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "TicketApi")
+@Table(name = "Ticket")
 public class Ticket {
 
     @Id
