@@ -1,57 +1,58 @@
 package com.springApp.spring5webapp.bootstrap;
 
-import com.springApp.spring5webapp.model.Author;
-import com.springApp.spring5webapp.model.Book;
-import com.springApp.spring5webapp.model.Publisher;
-import com.springApp.spring5webapp.repositories.AuthorRepository;
-import com.springApp.spring5webapp.repositories.BookRepository;
-import com.springApp.spring5webapp.repositories.PublisherRepository;
-import javafx.application.Application;
+import com.springApp.spring5webapp.model.Employeur;
+import com.springApp.spring5webapp.model.Ticket;
+import com.springApp.spring5webapp.repositories.EmployeurRepository;
+import com.springApp.spring5webapp.repositories.TicketRepository;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
 
-    private AuthorRepository authorRepository;
-    private BookRepository bookRepository;
-    private PublisherRepository publisherRepository;
+    private EmployeurRepository employeurRepository;
+    private TicketRepository ticketRepository;
 
-    public DevBootstrap(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
-        this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
-        this.publisherRepository = publisherRepository;
+    public DevBootstrap(EmployeurRepository employeurRepository, TicketRepository ticketRepository) {
+        this.employeurRepository = employeurRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         initDataBase();
     }
-    private void initDataBase(){
 
+    // Initailiser le BD avec un bouchon
+    private void initDataBase(){
         System.out.print("Initialise Data Base ----------------------->  ");
 
-        Publisher publisher = new Publisher();
-        publisher.setName("Alice");
+        Employeur empl_1 = new Employeur("Mohamed", "Jarray", "MJA14588",2);
+        Employeur empl_2 = new Employeur("Alice", "Johnason", "AJO45008", 0);
+        Employeur empl_3 = new Employeur("Elisa", "Quaston", "EQU162705", 0);
+        Employeur empl_4 = new Employeur("Kevin", "Bokin", "KBO145889", 1);
 
-        publisherRepository.save(publisher);
+        Ticket ticket_1 = new Ticket("Probleme lors de la recuperation des PP","EPR",0,false);
+        Ticket ticket_2 = new Ticket("Popin bloqante lors de validation de crédit conso","CDR",0.25f,true, "Aiguillage");
+        Ticket ticket_3 = new Ticket("NPE recherche PM","SRT",0.5f,true, "Assistant");
+        Ticket ticket_4 = new Ticket("Erreur de mapping des donneés","IM",1.5f,true, "Analyse");
 
-        // Mohamed
-        Author mohamed = new Author("Mohamed","Jarray");
-        Book book_mohamed = new Book("Test Driven Development","1234",publisher);
-        mohamed.getBooks().add(book_mohamed);
-        book_mohamed.getAuthors().add(mohamed);
+        empl_1.getListeTicket().add(ticket_3);
+        empl_1.getListeTicket().add(ticket_4);
+        empl_4.getListeTicket().add(ticket_2);
 
-        authorRepository.save(mohamed);
-        bookRepository.save(book_mohamed);
+        ticket_2.setEmployeur(empl_4);
+        ticket_3.setEmployeur(empl_1);
+        ticket_4.setEmployeur(empl_1);
 
-        // Eric
-        Author eric = new Author("Eric","Hard");
-        Book book_eric = new Book("Spring Boot 2","100",publisher);
-        eric.getBooks().add(book_eric);
+        List<Employeur> listEmployeurs = Arrays.asList(empl_1, empl_2, empl_3, empl_4);
+        List<Ticket> listTickets = Arrays.asList(ticket_1, ticket_2, ticket_3, ticket_4);
 
-        authorRepository.save(eric);
-        bookRepository.save(book_eric);
+        employeurRepository.saveAll(listEmployeurs);
+        ticketRepository.saveAll(listTickets);
     }
 }
