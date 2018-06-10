@@ -7,16 +7,22 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
+@Table(name = "Ticket")
 public class Ticket {
 
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "descriptif")
     private String descriptif;
+    @Column(name = "perimetre")
     private String perimetre;
+    @Column(name = "tempsTraitement")
     private float tempsTraitement;
+    @Column(name = "isClos")
     private boolean isClos;
+    @Column(name = "typeIntervention")
     private String typeIntervention;
 
     @JsonIgnore
