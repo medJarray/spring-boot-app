@@ -1,6 +1,6 @@
-package com.springApp.spring5webapp.services;
+package com.spring.app.spring5webapp.services;
 
-import com.springApp.spring5webapp.model.Ticket;
+import com.spring.app.spring5webapp.model.Ticket;
 
 import java.util.List;
 
