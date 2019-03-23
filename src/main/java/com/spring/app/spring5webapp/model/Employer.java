@@ -1,20 +1,17 @@
-package com.springApp.spring5webapp.model;
+package com.spring.app.spring5webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
-@Table(name = "Employeur")
-public class Employeur {
+@Table(name = "Employer")
+public class Employer {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "firstName")
@@ -23,24 +20,24 @@ public class Employeur {
     private String lastName;
     @Column(name = "matricule")
     private String matricule;
-    @Column(name = "nbrTichet")
+    @Column(name = "nbrTicket")
     private int nbrTicketEnCharge;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "employeur")
+    @OneToMany(mappedBy = "employer")
     private List<Ticket> listeTicket = new ArrayList<>();
 
-    public Employeur() {
+    public Employer() {
     }
 
-    public Employeur(String firstName, String lastName, String matricule, int nbrTicketEnCharge) {
+    public Employer(String firstName, String lastName, String matricule, int nbrTicketEnCharge) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.matricule = matricule;
         this.nbrTicketEnCharge = nbrTicketEnCharge;
     }
 
-    public Employeur(String firstName, String lastName, String matricule, int nbrTicketEnCharge, List<Ticket> listeTicket) {
+    public Employer(String firstName, String lastName, String matricule, int nbrTicketEnCharge, List<Ticket> listeTicket) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.matricule = matricule;
@@ -100,8 +97,8 @@ public class Employeur {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Employeur employeur = (Employeur) o;
-        return Objects.equals(id, employeur.id);
+        Employer employer = (Employer) o;
+        return Objects.equals(id, employer.id);
     }
 
     @Override
@@ -112,7 +109,7 @@ public class Employeur {
 
     @Override
     public String toString() {
-        return "Employeur{" +
+        return "Employer{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
