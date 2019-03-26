@@ -1,17 +1,15 @@
-package com.springApp.spring5webapp.model;
+package com.spring.app.spring5webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Ticket")
+@Table(name = "TicketApi")
 public class Ticket {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(name = "descriptif")
@@ -28,8 +26,8 @@ public class Ticket {
     @JsonIgnore
     @ManyToOne
     @JoinTable(name = "Employeur_Ticket", joinColumns = @JoinColumn(name = "employeur_matricule"),
-    inverseJoinColumns = @JoinColumn(name = "ticket_id"))
-    private Employeur employeur;
+            inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    private Employer employer;
 
     public Ticket() {
     }
@@ -40,7 +38,6 @@ public class Ticket {
         this.tempsTraitement = tempsTraitement;
         this.isClos = isClos;
     }
-
 
 
     public Ticket(String descriptif, String perimetre, float tempsTraitement, boolean isClos, String typeIntervention) {
@@ -99,12 +96,12 @@ public class Ticket {
         this.typeIntervention = typeIntervention;
     }
 
-    public Employeur getEmployeur() {
-        return employeur;
+    public Employer getEmployer() {
+        return employer;
     }
 
-    public void setEmployeur(Employeur employeur) {
-        this.employeur = employeur;
+    public void setEmployer(Employer employer) {
+        this.employer = employer;
     }
 
     @Override
@@ -123,14 +120,14 @@ public class Ticket {
 
     @Override
     public String toString() {
-        return "Ticket{" +
+        return "TicketApi{" +
                 "id=" + id +
                 ", descriptif='" + descriptif + '\'' +
                 ", perimetre=" + perimetre +
                 ", tempsTraitement=" + tempsTraitement +
                 ", isClos=" + isClos +
                 ", typeIntervention='" + typeIntervention + '\'' +
-                ", employeur=" + employeur +
+                ", employer=" + employer +
                 '}';
     }
 }
