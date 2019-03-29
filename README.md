@@ -1,4 +1,4 @@
-"# Spring-Boot-Web-App" 
+# Spring-Boot-Web-App
 
 [![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
 
