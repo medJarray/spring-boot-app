@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,8 +21,8 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
 /**
@@ -56,14 +57,14 @@ public class EmployerApiTest {
         List<Employer> employers = new ArrayList<>();
 
         when(employerService.getAllEmployer()).thenReturn(employers);
-        String officeAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employers);
+        String employerAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employers);
         mockMvc.perform(
                 MockMvcRequestBuilders.get(ApiEndpoints.EMPLOYERS)
                                       .accept(MediaType.APPLICATION_JSON_VALUE)
                                       .contentType(MediaType.APPLICATION_JSON_VALUE))
                .andExpect(status().isOk())
                .andExpect(content().contentType("application/json;charset=UTF-8"))
-               .andExpect(content().json(officeAsJson));
+               .andExpect(content().json(employerAsJson));
     }
 
 
@@ -96,4 +97,37 @@ public class EmployerApiTest {
                .andExpect(content().contentType("application/json;charset=UTF-8"));
     }
 
+    @Test
+    public void shouldReturnContentWhenSearchByNameAndNameIsNotExistAndSelectedLanguageIsFr() throws Exception {
+
+        String unFoundEmployer = "unFoundEmployer";
+        when(employerService.getEmployerByName(anyString())).thenReturn(Optional.empty());
+        mockMvc.perform(
+                MockMvcRequestBuilders.get(ApiEndpoints.EMPLOYERS_SEARCH_BY_NAME)
+                                      .accept(MediaType.APPLICATION_JSON_VALUE)
+                                      .header(HttpHeaders.ACCEPT_LANGUAGE, "fr")
+                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                      .param("name", unFoundEmployer))
+               .andDo(print())
+               .andExpect(status().isNotFound())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$").value("On peut pas trouver l emplyeur unFoundEmployer"));
+    }
+
+    @Test
+    public void shouldReturnContentWhenSearchByNameAndNameIsNotExistAndSelectedLanguageIsEn() throws Exception {
+
+        String unFoundEmployer = "unFoundEmployer";
+        when(employerService.getEmployerByName(anyString())).thenReturn(Optional.empty());
+        mockMvc.perform(
+                MockMvcRequestBuilders.get(ApiEndpoints.EMPLOYERS_SEARCH_BY_NAME)
+                                      .accept(MediaType.APPLICATION_JSON_VALUE)
+                                      .header(HttpHeaders.ACCEPT_LANGUAGE, "en")
+                                      .contentType(MediaType.APPLICATION_JSON_VALUE)
+                                      .param("name", unFoundEmployer))
+               .andDo(print())
+               .andExpect(status().isNotFound())
+               .andExpect(content().contentType("application/json;charset=UTF-8"))
+               .andExpect(jsonPath("$").value("Could not find employee unFoundEmployer"));
+    }
 }
