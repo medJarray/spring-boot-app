@@ -1,6 +1,9 @@
+
 # Spring-Boot-Web-App
 
+
 [![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
+
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
 
@@ -12,6 +15,7 @@ To properly document the available endpoints in your REST API, which endpoints t
 After running the application, go to http://localhost:8090/api/swagger-ui.html. If you see a blank screen, you might have to refresh once, but normally you’ll see a screen like this:
 
 ![img](src/main/resources/screen-shot/swagger.jpg "Title")
+
 
 ## Spring Boot REST Internationalization
 
