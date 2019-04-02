@@ -33,9 +33,9 @@ public class SwaggerConfig {
 
 
     private ApiInfo apiInfo() {
-        String description = "REST example";
+        String description = "Description of the project Spring-Boot-Web-App";
         return new ApiInfoBuilder()
-                .title("REST example")
+                .title("Spring-Boot-Web-App")
                 .description(description)
                 .termsOfServiceUrl("github")
                 .license("MIT License")
