@@ -1,7 +1,7 @@
 package com.spring.app.spring5webapp.configuration;
 
-import com.spring.app.spring5webapp.model.Employer;
-import com.spring.app.spring5webapp.model.Ticket;
+import com.spring.app.spring5webapp.entity.Employer;
+import com.spring.app.spring5webapp.entity.Ticket;
 import com.spring.app.spring5webapp.repositories.EmployerRepository;
 import com.spring.app.spring5webapp.repositories.TicketRepository;
 import org.slf4j.Logger;
