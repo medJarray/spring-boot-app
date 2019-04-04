@@ -1,13 +1,17 @@
 package com.spring.app.spring5webapp.services;
 
-import com.spring.app.spring5webapp.model.Employer;
+import com.spring.app.spring5webapp.entity.Employer;
+import com.spring.app.spring5webapp.model.CreateEmployer;
+import com.spring.app.spring5webapp.model.EmployerElement;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmployerService {
 
-    List<Employer> getAllEmployer();
+    List<EmployerElement> getAllEmployer();
 
     Optional<Employer> getEmployerByName(String name);
+
+    EmployerElement createEmployer(CreateEmployer employerToCreate);
 }

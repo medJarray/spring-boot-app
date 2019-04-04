@@ -1,7 +1,7 @@
 package com.spring.app.spring5webapp.api;
 
 import com.spring.app.spring5webapp.common.ApiEndpoints;
-import com.spring.app.spring5webapp.model.Ticket;
+import com.spring.app.spring5webapp.entity.Ticket;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 

@@ -1,12 +1,13 @@
-package com.spring.app.spring5webapp.model;
+package com.spring.app.spring5webapp.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "Employer")
 public class Employer {
@@ -23,7 +24,6 @@ public class Employer {
     @Column(name = "nbrTicket")
     private int nbrTicketEnCharge;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "employer")
     private List<Ticket> listeTicket = new ArrayList<>();
 
