@@ -2,7 +2,7 @@ package com.spring.app.spring5webapp.api.controllers;
 
 
 import com.spring.app.spring5webapp.api.TicketApi;
-import com.spring.app.spring5webapp.model.Ticket;
+import com.spring.app.spring5webapp.entity.Ticket;
 import com.spring.app.spring5webapp.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;

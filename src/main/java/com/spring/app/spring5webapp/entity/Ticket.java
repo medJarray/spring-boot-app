@@ -1,10 +1,12 @@
-package com.spring.app.spring5webapp.model;
+package com.spring.app.spring5webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Objects;
 
+@Data
 @Entity
 @Table(name = "TicketApi")
 public class Ticket {
@@ -48,61 +50,6 @@ public class Ticket {
         this.typeIntervention = typeIntervention;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescriptif() {
-        return descriptif;
-    }
-
-    public void setDescriptif(String descriptif) {
-        this.descriptif = descriptif;
-    }
-
-    public String getPerimetre() {
-        return perimetre;
-    }
-
-    public void setPerimetre(String perimetre) {
-        this.perimetre = perimetre;
-    }
-
-    public float getTempsTraitement() {
-        return tempsTraitement;
-    }
-
-    public void setTempsTraitement(float tempsTraitement) {
-        this.tempsTraitement = tempsTraitement;
-    }
-
-    public boolean isClos() {
-        return isClos;
-    }
-
-    public void setClos(boolean clos) {
-        isClos = clos;
-    }
-
-    public String getTypeIntervention() {
-        return typeIntervention;
-    }
-
-    public void setTypeIntervention(String typeIntervention) {
-        this.typeIntervention = typeIntervention;
-    }
-
-    public Employer getEmployer() {
-        return employer;
-    }
-
-    public void setEmployer(Employer employer) {
-        this.employer = employer;
-    }
 
     @Override
     public boolean equals(Object o) {

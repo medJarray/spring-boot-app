@@ -1,7 +1,7 @@
 package com.spring.app.spring5webapp.services.impl;
 
 
-import com.spring.app.spring5webapp.model.Ticket;
+import com.spring.app.spring5webapp.entity.Ticket;
 import com.spring.app.spring5webapp.repositories.TicketRepository;
 import com.spring.app.spring5webapp.services.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
