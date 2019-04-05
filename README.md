@@ -5,7 +5,7 @@
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
 
 
-### Why I should use DTOs in your REST API
+## Why I should use DTOs in your REST API
 DTO stands for Data Transfer Object. The  advantage of using DTOs on RESTful APIs is that they can help hiding implementation details of domain objects (aka. entities). 
 Exposing entities through endpoints can become a security issue if we do not carefully handle what properties can be changed through what operations.
 
@@ -50,6 +50,23 @@ On peut pas trouver l emplyeur toto
 So as you see, responses are different based on value of “Accept-Language” header passed in the request. This way, we don’t need to check what was passed in the request in each controller method, and then pass it further to service layers. We now can do this in one single place, which is CustomLocaleResolver class.
 
 
+## Behaviour-Driven Development methodology
+Behavior-Driven Development aka BDD, its intent is to enable developers to write high-level use cases in plain text that can be verified by non-technical stakeholders, and turn them into executable tests, written in a language called Gherkin.
+
+![img](src/main/resources/screen-shot/bdd.jpg "Title")
+
+just 5 step recipe for making it work :
+1. Configure the build script
+2. Write the Gherkin tests
+3. Implement the Gherkin steps test code
+4. Implement the feature being tested
+5. Run the Gherkin tests and get the result
+
+Results of test are saved in : target/cucumber-reports/index.html
 ### References: 
 * [REST API - DTOs or not?](https://stackoverflow.com/a/36175349/8956678)
 * [Automatically Mapping DTO to Entity on Spring Boot APIs](https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis)
+* [Rédiger des spécifications - La syntaxe Gherkin](https://github.com/Behat/fr-docs.behat.org/blob/master/guides/1.gherkin.rst)
+* [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)
+to see
+https://univers-architecture.com/2017/12/11/tutoriel-integration-de-cucumber-avec-spring-boot/
