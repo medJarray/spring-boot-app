@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
 
+[![codecov](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App/branch/master/graph/badge.svg)](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App)
+
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
 
 
@@ -63,6 +65,7 @@ just 5 step recipe for making it work :
 5. Run the Gherkin tests and get the result
 
 Results of test are saved in : target/cucumber-reports/index.html
+
 ### References: 
 * [REST API - DTOs or not?](https://stackoverflow.com/a/36175349/8956678)
 * [Automatically Mapping DTO to Entity on Spring Boot APIs](https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis)
