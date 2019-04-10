@@ -36,10 +36,10 @@ public class EmployerServiceTest {
     private EmployerRepository employerRepository;
 
     @Autowired
-    private EmployerServiceImpl employerServiceImpl;
+    private ModelMapper mapper;
 
     @Autowired
-    ModelMapper mapper;
+    private EmployerServiceImpl employerServiceImpl = new EmployerServiceImpl(employerRepository, mapper);
 
 
     @Test

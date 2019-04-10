@@ -5,6 +5,7 @@ import com.spring.app.spring5webapp.model.CreateEmployer;
 import com.spring.app.spring5webapp.model.EmployerElement;
 import com.spring.app.spring5webapp.repositories.EmployerRepository;
 import com.spring.app.spring5webapp.services.EmployerService;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,13 +15,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EmployerServiceImpl implements EmployerService {
 
-    @Autowired
-    private EmployerRepository employerRepository;
+    private final EmployerRepository employerRepository;
 
-    @Autowired
-    ModelMapper mapper;
+    private final ModelMapper mapper;
 
     @Override
     public List<EmployerElement> getAllEmployer() {
