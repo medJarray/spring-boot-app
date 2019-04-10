@@ -72,6 +72,7 @@ just 5 step recipe for making it work :
 Results of test are saved in : target/cucumber-reports/index.html
 
 ### References: 
+* [Spring Boot REST Internationalization](https://blog.usejournal.com/spring-boot-rest-internationalization-9ab3fce2489)
 * [REST API - DTOs or not?](https://stackoverflow.com/a/36175349/8956678)
 * [Automatically Mapping DTO to Entity on Spring Boot APIs](https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis)
 * [Rédiger des spécifications - La syntaxe Gherkin](https://github.com/Behat/fr-docs.behat.org/blob/master/guides/1.gherkin.rst)
