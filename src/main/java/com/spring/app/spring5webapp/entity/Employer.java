@@ -35,4 +35,5 @@ public class Employer {
         this.matricule = matricule;
         this.nbrTicketEnCharge = nbrTicketEnCharge;
     }
+
 }

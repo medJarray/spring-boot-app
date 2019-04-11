@@ -1,13 +1,16 @@
+
 # Spring-Boot-Web-App
 
 [![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
 
 [![codecov](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App/branch/master/graph/badge.svg)](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App)
 
+
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
 
 
 ## Why I should use DTOs in your REST API
+
 DTO stands for Data Transfer Object. The  advantage of using DTOs on RESTful APIs is that they can help hiding implementation details of domain objects (aka. entities). 
 Exposing entities through endpoints can become a security issue if we do not carefully handle what properties can be changed through what operations.
 
@@ -34,6 +37,7 @@ After running the application, go to http://localhost:8090/api/swagger-ui.html. 
 
 ![img](src/main/resources/screen-shot/swagger.jpg "Title")
 
+
 ## Spring Boot REST Internationalization
 
 Let's make simple requests using CURL:
@@ -50,6 +54,7 @@ $ curl -X GET "http://localhost:8090/api/employers/search?name=toto" -H "accept:
 On peut pas trouver l emplyeur toto
 ```
 So as you see, responses are different based on value of “Accept-Language” header passed in the request. This way, we don’t need to check what was passed in the request in each controller method, and then pass it further to service layers. We now can do this in one single place, which is CustomLocaleResolver class.
+
 
 
 ## Behaviour-Driven Development methodology
@@ -73,3 +78,4 @@ Results of test are saved in : target/cucumber-reports/index.html
 * [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)
 to see
 https://univers-architecture.com/2017/12/11/tutoriel-integration-de-cucumber-avec-spring-boot/
+
