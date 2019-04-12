@@ -7,6 +7,8 @@ public final class ApiEndpoints {
 
     public static final String TICKETS = "/tickets";
 
+    public static final String VERSION = "/version";
+
     /**
      * The caller references the constants using <tt>ApiEndpoints.EMPLOYERS_SEARCH_BY_NAME</tt>,
      * and so on. Thus, the caller should be prevented from constructing objects of

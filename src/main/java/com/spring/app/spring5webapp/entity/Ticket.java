@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Data
 @Entity
@@ -50,31 +49,4 @@ public class Ticket {
         this.typeIntervention = typeIntervention;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Ticket ticket = (Ticket) o;
-        return Objects.equals(id, ticket.id);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return id != null ? id.hashCode() : 0;
-    }
-
-    @Override
-    public String toString() {
-        return "TicketApi{" +
-                "id=" + id +
-                ", descriptif='" + descriptif + '\'' +
-                ", perimetre=" + perimetre +
-                ", tempsTraitement=" + tempsTraitement +
-                ", isClos=" + isClos +
-                ", typeIntervention='" + typeIntervention + '\'' +
-                ", employer=" + employer +
-                '}';
-    }
 }

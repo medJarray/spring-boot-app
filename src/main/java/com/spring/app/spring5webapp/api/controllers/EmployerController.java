@@ -5,6 +5,7 @@ import com.spring.app.spring5webapp.api.controllers.exception.EmployerNotFoundEx
 import com.spring.app.spring5webapp.model.CreateEmployer;
 import com.spring.app.spring5webapp.model.EmployerElement;
 import com.spring.app.spring5webapp.services.EmployerService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -18,13 +19,13 @@ import java.text.MessageFormat;
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class EmployerController implements EmployerApi {
 
-    @Autowired
-    private MessageSource messageSource;
+    private final MessageSource messageSource;
 
-    @Autowired
-    private EmployerService employerService;
+    private final EmployerService employerService;
+
 
     @Override
     public ResponseEntity<EmployerElement> createEmployer(CreateEmployer employerToCreate) {

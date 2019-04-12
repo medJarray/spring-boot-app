@@ -3,14 +3,22 @@ jdk: oraclejdk8
 sudo: false
 dist: trusty
 install: true
+addons:
+  sonarcloud:
+    organization: raouf25-github
+    token:
+      secure: cgbmIM62evlwf2dl/Shf31qDf9TwBhnE4qOPfy9w9sShzOzW/n/N14MJ3pvX2Dngd7gzslEEmNDHhvlkxLbIPOCq2NiHfjvtciiRQn/j9wdKWjKCUatRcCk0bur0LhojI/XiqysvwV5PleHo9LeDq3ikCouJQMMu+EP5DyeKwTOti+bRdsji/0rQNU1J40jAQ1byGs8v9YVQZFdA+yUHSrR0UJRYYgfDXdrEshpyovJYZlPO0fPTvq5sEPhSqFkb0AKK+QLZN/ttA2AthWfC8ML+6fDIDwgcCbfaQo4Jr+SZ1XWI5PYUWiMOMPT/xI2yNzHa5t14xxNMJgdwOZVZh+zbfV+bmGqSlxks2ZIHS+sFmBWG8L33kSCmbm+SWUY1/A1pV4Jaicaq1cyXUVHitHOtlAXgFlGkB3KPYcuUMcmmjPDXAm9ZJxn9blFOUzN5Wx3/T1o7d7hN4ONOIQfRO7PWymxEmP3JnbVGJaDV8NoABdg8A+AvCJtQ21HN08fjlSKFEaPQveoLNViUJKG4LwvXyrK5uq4Qu7yQPl/7sCWSqx7L566lFDaWUcT1lu3Zdcfqbz0ZsnX04iu/uJa6gRW45udsuZ0KScJZ0zgFWLVsLWt7NF3KpvnxHKmv4EUQnPbbfucSDidEyo3BoqBaT4qCIRA+kGK7w3wxSdTF0q8=
 script:
-- mvn clean package  sonar:sonar     -Dsonar.host.url=https://sonarcloud.io     -Dsonar.organization=raouf25-github     -Dsonar.login=d9bba4e85b51f2d3e224215005455b88d62f3e18
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
+  - mvn cobertura:cobertura
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
 cache:
   directories:
   - "$HOME/.m2"
   - "$HOME/.sonar/cache"
 before_install:
-- chmod +x mvnw
+  - chmod +x mvnw
 notifications:
   email:
     recipients:
