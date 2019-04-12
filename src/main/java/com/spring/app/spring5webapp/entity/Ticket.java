@@ -1,11 +1,17 @@
 package com.spring.app.spring5webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "TicketApi")
 public class Ticket {
@@ -29,24 +35,4 @@ public class Ticket {
     @JoinTable(name = "Employeur_Ticket", joinColumns = @JoinColumn(name = "employeur_matricule"),
             inverseJoinColumns = @JoinColumn(name = "ticket_id"))
     private Employer employer;
-
-    public Ticket() {
-    }
-
-    public Ticket(String descriptif, String perimetre, float tempsTraitement, boolean isClos) {
-        this.descriptif = descriptif;
-        this.perimetre = perimetre;
-        this.tempsTraitement = tempsTraitement;
-        this.isClos = isClos;
-    }
-
-
-    public Ticket(String descriptif, String perimetre, float tempsTraitement, boolean isClos, String typeIntervention) {
-        this.descriptif = descriptif;
-        this.perimetre = perimetre;
-        this.tempsTraitement = tempsTraitement;
-        this.isClos = isClos;
-        this.typeIntervention = typeIntervention;
-    }
-
 }

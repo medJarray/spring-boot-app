@@ -45,8 +45,18 @@ public class EmployerServiceTest {
     @Test
     public void given_EmployerExist_When_findAllEmployer_Then_getEmployer() {
         //  arrange
-        Employer employer1 = new Employer("Mohamed", "Jarray", "MJA14588", 2);
-        Employer employer2 = new Employer("Mohamed-I", "Jarray", "MJA14568", 6);
+        Employer employer1 = new Employer().builder()
+                                           .firstName("Mohamed")
+                                           .lastName("Jarray")
+                                           .matricule("MJA14588")
+                                           .nbrTicketEnCharge(2)
+                                           .build();
+        Employer employer2 = new Employer().builder()
+                                           .firstName("Mohamed-I")
+                                           .lastName("Jarray")
+                                           .matricule("MJA14588")
+                                           .nbrTicketEnCharge(2)
+                                           .build();
         List<Employer> employerList = new ArrayList<>();
         employerList.add(employer1);
         employerList.add(employer2);
@@ -64,7 +74,12 @@ public class EmployerServiceTest {
     @Test
     public void given_EmployerExist_When_findEmployerByName_Then_getEmployer() {
         //  arrange
-        Employer employer = new Employer("Mohamed", "Jarray", "MJA14588", 2);
+        Employer employer = new Employer().builder()
+                                          .firstName("Mohamed")
+                                          .lastName("Jarray")
+                                          .matricule("MJA14588")
+                                          .nbrTicketEnCharge(2)
+                                          .build();
         when(employerRepository.findEmployersByName("Mohamed")).thenReturn(employer);
 
         //  act

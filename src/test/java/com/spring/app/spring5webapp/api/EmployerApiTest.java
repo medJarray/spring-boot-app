@@ -128,7 +128,13 @@ public class EmployerApiTest {
 
     @Test
     public void shouldReturnContentWhenSearchByNameAndNameExists() throws Exception {
-        Optional<Employer> employer = Optional.of(new Employer("Mohamed", "Jarray", "MJA14588", 2));
+        Optional<Employer> employer = Optional.of(new Employer().builder()
+                                                                .firstName("Mohamed")
+                                                                .lastName("Jarray")
+                                                                .matricule("MJA14588")
+                                                                .nbrTicketEnCharge(2)
+                                                                .build());
+
 
         when(employerService.getEmployerByName(anyString())).thenReturn(employer);
         String employerAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employer);

@@ -1,7 +1,7 @@
 
 # Spring-Boot-Web-App
 
-[![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
+[![Build Status](https://travis-ci.org/Raouf25/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/Raouf25/Spring-Boot-Web-App)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Raouf25/Spring-Boot-Web-App?branch=master)](https://bettercodehub.com/)
 [![codecov](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App/branch/master/graph/badge.svg)](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App)
 

@@ -1,12 +1,18 @@
 package com.spring.app.spring5webapp.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "Employer")
 public class Employer {
@@ -25,15 +31,5 @@ public class Employer {
 
     @OneToMany(mappedBy = "employer")
     private List<Ticket> listeTicket = new ArrayList<>();
-
-    public Employer() {
-    }
-
-    public Employer(String firstName, String lastName, String matricule, int nbrTicketEnCharge) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.matricule = matricule;
-        this.nbrTicketEnCharge = nbrTicketEnCharge;
-    }
 
 }
