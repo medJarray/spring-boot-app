@@ -1,10 +1,7 @@
 package com.spring.app.spring5webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -12,12 +9,14 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode(exclude = {"employer"})
+@ToString(exclude = {"employer"})
 @Entity
 @Table(name = "TicketApi")
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "descriptif")
     private String descriptif;
@@ -31,8 +30,9 @@ public class Ticket {
     private String typeIntervention;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinTable(name = "Employeur_Ticket", joinColumns = @JoinColumn(name = "employeur_matricule"),
-            inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "Employer_Ticket",
+            joinColumns = @JoinColumn(name = "Ticket_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "employer_id"))
     private Employer employer;
 }

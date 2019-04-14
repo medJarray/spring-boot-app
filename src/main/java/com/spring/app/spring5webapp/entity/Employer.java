@@ -1,24 +1,23 @@
 package com.spring.app.spring5webapp.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "Employer")
 public class Employer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "firstName")
     private String firstName;
@@ -26,10 +25,24 @@ public class Employer {
     private String lastName;
     @Column(name = "matricule")
     private String matricule;
-    @Column(name = "nbrTicket")
-    private int nbrTicketEnCharge;
 
-    @OneToMany(mappedBy = "employer")
-    private List<Ticket> listeTicket = new ArrayList<>();
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Ticket> tickets = new HashSet<>();
+
+    public Ticket addTicket(Ticket ticket) {
+        if (getTickets() == null) {
+            tickets = new HashSet<>();
+        }
+        getTickets().add(ticket);
+        ticket.setEmployer(this);
+        return ticket;
+    }
+
+    public Ticket removeTicket(Ticket ticket) {
+        getTickets().remove(ticket);
+        ticket.setEmployer(null);
+        return ticket;
+    }
+
 
 }

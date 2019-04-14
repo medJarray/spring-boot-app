@@ -4,6 +4,7 @@ import com.spring.app.spring5webapp.configuration.MapperConfig;
 import com.spring.app.spring5webapp.entity.Employer;
 import com.spring.app.spring5webapp.model.EmployerElement;
 import com.spring.app.spring5webapp.repositories.EmployerRepository;
+import com.spring.app.spring5webapp.services.EmployerService;
 import com.spring.app.spring5webapp.services.impl.EmployerServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,56 +39,38 @@ public class EmployerServiceTest {
     private ModelMapper mapper;
 
     @Autowired
-    private EmployerServiceImpl employerServiceImpl = new EmployerServiceImpl(employerRepository, mapper);
+    private EmployerService employerService = new EmployerServiceImpl(employerRepository, mapper);
 
 
     @Test
     public void given_EmployerExist_When_findAllEmployer_Then_getEmployer() {
         //  arrange
-        Employer employer1 = new Employer().builder()
-                                           .firstName("Mohamed")
-                                           .lastName("Jarray")
-                                           .matricule("MJA14588")
-                                           .nbrTicketEnCharge(2)
-                                           .build();
-        Employer employer2 = new Employer().builder()
-                                           .firstName("Mohamed-I")
-                                           .lastName("Jarray")
-                                           .matricule("MJA14588")
-                                           .nbrTicketEnCharge(2)
-                                           .build();
-        List<Employer> employerList = new ArrayList<>();
-        employerList.add(employer1);
-        employerList.add(employer2);
+        List<Employer> employerList = DataProvider.getEmployerList();
         when(employerRepository.findAll()).thenReturn(employerList);
 
         //  act
-        List<EmployerElement> employerByName = employerServiceImpl.getAllEmployer();
+        List<EmployerElement> employerByName = employerService.getAllEmployer();
 
         //  assert
-        assertThat(employerByName).extracting("firstName", "lastName", "matricule", "nbrTicketEnCharge")
-                                  .contains(tuple(employer1.getFirstName(), employer1.getLastName(), employer1.getMatricule(), employer1.getNbrTicketEnCharge()));
+        assertThat(employerByName).hasSize(employerList.size());
+        assertThat(employerByName).extracting("firstName", "lastName", "matricule")
+                                  .contains(tuple(employerList.get(0).getFirstName(), employerList.get(0).getLastName(), employerList.get(0).getMatricule()));
 
     }
 
     @Test
     public void given_EmployerExist_When_findEmployerByName_Then_getEmployer() {
         //  arrange
-        Employer employer = new Employer().builder()
-                                          .firstName("Mohamed")
-                                          .lastName("Jarray")
-                                          .matricule("MJA14588")
-                                          .nbrTicketEnCharge(2)
-                                          .build();
+        Employer employer = DataProvider.getEmployer();
         when(employerRepository.findEmployersByName("Mohamed")).thenReturn(employer);
 
         //  act
-        Optional<Employer> employerByName = employerServiceImpl.getEmployerByName("Mohamed");
+        Optional<Employer> employerByName = employerService.getEmployerByName("Mohamed");
 
         //  assert
         Employer employerFound = employerByName.get();
-        assertThat(employerFound).extracting("firstName", "lastName", "matricule", "nbrTicketEnCharge")
-                                 .contains(employerFound.getFirstName(), employerFound.getLastName(), employerFound.getMatricule(), employerFound.getNbrTicketEnCharge());
+        assertThat(employerFound).extracting("firstName", "lastName", "matricule")
+                                 .contains(employerFound.getFirstName(), employerFound.getLastName(), employerFound.getMatricule());
 
     }
 
@@ -98,7 +80,7 @@ public class EmployerServiceTest {
         when(employerRepository.findEmployersByName("Mohamed")).thenReturn(null);
 
         //  act
-        Optional<Employer> employerByName = employerServiceImpl.getEmployerByName(anyString());
+        Optional<Employer> employerByName = employerService.getEmployerByName(anyString());
 
         //  assert
         boolean present = employerByName.isPresent();

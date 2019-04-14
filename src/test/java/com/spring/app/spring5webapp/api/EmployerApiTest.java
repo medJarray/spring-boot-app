@@ -5,6 +5,7 @@ import com.spring.app.spring5webapp.common.ApiEndpoints;
 import com.spring.app.spring5webapp.entity.Employer;
 import com.spring.app.spring5webapp.model.CreateEmployer;
 import com.spring.app.spring5webapp.model.EmployerElement;
+import com.spring.app.spring5webapp.service.DataProvider;
 import com.spring.app.spring5webapp.services.EmployerService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -57,15 +58,8 @@ public class EmployerApiTest {
 
     @Test
     public void shouldCreateAnEmployer() throws Exception {
-        CreateEmployer employerToCreated = new CreateEmployer();
-        employerToCreated.setFirstName("toti");
-        employerToCreated.setLastName("tata");
-        employerToCreated.setMatricule("mat1245");
-        EmployerElement employerElement = new EmployerElement();
-        employerElement.setFirstName("roti");
-        employerElement.setLastName("rata");
-        employerElement.setMatricule("mat5421");
-        employerElement.setNbrTicketEnCharge(0);
+        CreateEmployer employerToCreated = DataProvider.getCreateEmployer();
+        EmployerElement employerElement = DataProvider.getEmployerElement();
 
         when(employerService.createEmployer(employerToCreated)).thenReturn(employerElement);
         String employerToCreateAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employerToCreated);
@@ -99,24 +93,10 @@ public class EmployerApiTest {
 
     @Test
     public void shouldReturnNotContentWhenAllEmployerReturnsEmployerElementList() throws Exception {
-        List<EmployerElement> employers = new ArrayList<>();
-        EmployerElement employerElement1 = new EmployerElement();
-        employerElement1.setFirstName("toti");
-        employerElement1.setLastName("tata");
-        employerElement1.setMatricule("mat1245");
-        employerElement1.setNbrTicketEnCharge(0);
+        List<EmployerElement> employersElementList = DataProvider.getEmployerElementList();
 
-        EmployerElement employerElement2 = new EmployerElement();
-        employerElement2.setFirstName("toti");
-        employerElement2.setLastName("tata");
-        employerElement2.setMatricule("mat1245");
-        employerElement2.setNbrTicketEnCharge(0);
-
-        employers.add(employerElement1);
-        employers.add(employerElement2);
-
-        when(employerService.getAllEmployer()).thenReturn(employers);
-        String employerAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employers);
+        when(employerService.getAllEmployer()).thenReturn(employersElementList);
+        String employerAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employersElementList);
         mockMvc.perform(
                 MockMvcRequestBuilders.get(ApiEndpoints.EMPLOYERS)
                                       .accept(MediaType.APPLICATION_JSON_VALUE)
@@ -128,12 +108,7 @@ public class EmployerApiTest {
 
     @Test
     public void shouldReturnContentWhenSearchByNameAndNameExists() throws Exception {
-        Optional<Employer> employer = Optional.of(new Employer().builder()
-                                                                .firstName("Mohamed")
-                                                                .lastName("Jarray")
-                                                                .matricule("MJA14588")
-                                                                .nbrTicketEnCharge(2)
-                                                                .build());
+        Optional<Employer> employer = Optional.of(DataProvider.getEmployer());
 
 
         when(employerService.getEmployerByName(anyString())).thenReturn(employer);
