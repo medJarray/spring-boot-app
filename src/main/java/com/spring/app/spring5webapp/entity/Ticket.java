@@ -2,11 +2,12 @@ package com.spring.app.spring5webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 
 @Data
-@Builder
+@Wither
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(exclude = {"employer"})
@@ -34,5 +35,7 @@ public class Ticket {
     @JoinTable(name = "Employer_Ticket",
             joinColumns = @JoinColumn(name = "Ticket_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "employer_id"))
+//    @JoinColumn(name ="FK_MainMenuId")
+//    https://stackoverflow.com/a/30292348/8956678
     private Employer employer;
 }

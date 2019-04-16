@@ -2,12 +2,12 @@ package com.spring.app.spring5webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Wither;
 
 @Data
-@Builder
+@Wither
 @NoArgsConstructor
 @AllArgsConstructor
 public class EmployerElement {

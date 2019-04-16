@@ -10,56 +10,44 @@ import java.util.List;
 
 public class DataProvider {
     public static Employer getEmployer() {
-        return new Employer().builder()
-                             .firstName("Mohamed")
-                             .lastName("Jarray")
-                             .matricule("MJA14588")
-                             .build();
+        return new Employer().withFirstName("Mohamed")
+                             .withLastName("Jarray")
+                             .withMatricule("MJA14588");
     }
 
     public static List<Employer> getEmployerList() {
         Employer employer1 = getEmployer();
-        Employer employer2 = new Employer().builder()
-                                           .firstName("Mohamed-I")
-                                           .lastName("Jarray")
-                                           .matricule("MJA14588")
-                                           .build();
+        Employer employer2 = new Employer().withFirstName("Mohamed-I")
+                                           .withLastName("Jarray")
+                                           .withMatricule("MJA14588");
         return Arrays.asList(employer1, employer2);
     }
 
     public static CreateEmployer getCreateEmployer() {
-        return new CreateEmployer().builder()
-                                   .firstName("toti")
-                                   .lastName("tata")
-                                   .matricule("mat1245")
-                                   .build();
+        return new CreateEmployer().withFirstName("toti")
+                                   .withLastName("tata")
+                                   .withMatricule("mat1245");
     }
 
     public static EmployerElement getEmployerElement() {
-        return new EmployerElement().builder()
-                                    .firstName("toti")
-                                    .lastName("tata")
-                                    .matricule("mat1245")
-                                    .build();
+        return new EmployerElement().withFirstName("toti")
+                                    .withLastName("tata")
+                                    .withMatricule("mat1245");
     }
 
     public static List<EmployerElement> getEmployerElementList() {
         EmployerElement employer1 = getEmployerElement();
-        EmployerElement employer2 = new EmployerElement().builder()
-                                                         .firstName("Mohamed-I")
-                                                         .lastName("Jarray")
-                                                         .matricule("MJA14588")
-                                                         .build();
+        EmployerElement employer2 = new EmployerElement().withFirstName("Mohamed-I")
+                                                         .withLastName("Jarray")
+                                                         .withMatricule("MJA14588");
         return Arrays.asList(employer1, employer2);
     }
 
     public static Ticket getTicket() {
-        return new Ticket().builder()
-                           .id(15L)
-                           .descriptif("Probleme lors de la recuperation des PP")
-                           .perimetre("ERP")
-                           .tempsTraitement(0.25f)
-                           .isClos(true)
-                           .build();
+        return new Ticket().withId(15L)
+                           .withDescriptif("Probleme lors de la recuperation des PP")
+                           .withPerimetre("ERP")
+                           .withTempsTraitement(0.25f)
+                           .withClos(true);
     }
 }

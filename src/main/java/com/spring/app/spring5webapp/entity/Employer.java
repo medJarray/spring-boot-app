@@ -1,13 +1,14 @@
 package com.spring.app.spring5webapp.entity;
 
 import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@Builder
+@Wither
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
