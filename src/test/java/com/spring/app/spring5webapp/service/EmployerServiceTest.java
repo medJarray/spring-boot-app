@@ -43,7 +43,7 @@ public class EmployerServiceTest {
 
 
     @Test
-    public void given_EmployerExist_When_findAllEmployer_Then_getEmployer() {
+    public void given_EmployerExist_When_findAllEmployer_Then_getEmployer() throws InterruptedException {
         //  arrange
         List<Employer> employerList = DataProvider.getEmployerList();
         when(employerRepository.findAll()).thenReturn(employerList);

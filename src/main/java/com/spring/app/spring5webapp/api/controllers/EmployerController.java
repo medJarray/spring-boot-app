@@ -11,7 +11,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,14 +32,10 @@ public class EmployerController implements EmployerApi {
         return new ResponseEntity(employer, null, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<EmployerElement>> getAllEmployers() {
+    public ResponseEntity<List<EmployerElement>> getAllEmployers() throws InterruptedException {
         List<EmployerElement> allEmployer = employerService.getAllEmployer();
+        return new ResponseEntity(allEmployer, null, allEmployer.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK);
 
-        if (CollectionUtils.isEmpty(allEmployer)) {
-            return new ResponseEntity(allEmployer, null, HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity(allEmployer, null, HttpStatus.OK);
-        }
     }
 
     public ResponseEntity<EmployerElement> getEmployerByName(@RequestParam("name") String name) {

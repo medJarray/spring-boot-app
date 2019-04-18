@@ -28,9 +28,9 @@ public interface EmployerApi {
 
     @ApiOperation(value = "Get list of all employers.", notes = "The list is paginated. You can provide a page number (default 0) and a page size (default 100)")
     @GetMapping(value = ApiEndpoints.EMPLOYERS, produces = "application/json")
-    ResponseEntity<List<EmployerElement>> getAllEmployers();
+    ResponseEntity<List<EmployerElement>> getAllEmployers() throws InterruptedException;
 
     @ApiOperation(value = "Get employer by name.", notes = "The list is paginated. You can provide a page number (default 0) and a page size (default 100)")
     @GetMapping(value = ApiEndpoints.EMPLOYERS_SEARCH_BY_NAME, produces = "application/json")
-    ResponseEntity<EmployerElement> getEmployerByName(@RequestParam("name") String name);
+    ResponseEntity getEmployerByName(@RequestParam("name") String name);
 }
