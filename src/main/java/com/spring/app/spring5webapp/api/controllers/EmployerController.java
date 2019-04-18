@@ -33,7 +33,7 @@ public class EmployerController implements EmployerApi {
         return new ResponseEntity(employer, null, HttpStatus.CREATED);
     }
 
-    public ResponseEntity<List<EmployerElement>> getAllEmployers() {
+    public ResponseEntity<List<EmployerElement>> getAllEmployers() throws InterruptedException {
         List<EmployerElement> allEmployer = employerService.getAllEmployer();
 
         if (CollectionUtils.isEmpty(allEmployer)) {

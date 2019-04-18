@@ -55,7 +55,14 @@ On peut pas trouver l emplyeur toto
 ```
 So as you see, responses are different based on value of “Accept-Language” header passed in the request. This way, we don’t need to check what was passed in the request in each controller method, and then pass it further to service layers. We now can do this in one single place, which is CustomLocaleResolver class.
 
-
+## Spring Boot & performance
+when you execut GET request to our find all users endpoint, you’ll get next result:
+![img](src/main/resources/screen-shot/cache1.jpg "Title")
+So, it takes about 3253 milliseconds to get all users. And this is an horrible scenario for real use case !!  
+So here Spring Cache can solve our issue!  
+Now when you restarted the server and make GET request to fetch all users — first time it will take those 3 with something seconds to get data back to you. Because firstly it will check the cache, and will see that it is empty, and will execute the method, with 3 seconds delay. But all further requests to findAll() will be executed much much faster, because method will not be executed, since requested data was cached previously and will be taken for you from the cache.
+![img](src/main/resources/screen-shot/cache2.jpg "Title")
+As you see, the request execution time is much less, than before. It’s simply because the method findAll() is not executed, since the data is already in cache, that’s why it works so fast
 
 ## Behaviour-Driven Development methodology
 Behavior-Driven Development aka BDD, its intent is to enable developers to write high-level use cases in plain text that can be verified by non-technical stakeholders, and turn them into executable tests, written in a language called Gherkin.
@@ -75,8 +82,9 @@ Results of test are saved in : target/cucumber-reports/index.html
 * [Spring Boot REST Internationalization](https://blog.usejournal.com/spring-boot-rest-internationalization-9ab3fce2489)
 * [REST API - DTOs or not?](https://stackoverflow.com/a/36175349/8956678)
 * [Automatically Mapping DTO to Entity on Spring Boot APIs](https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis)
+* [How To: Add caching support to your Spring Boot application](https://dev-journal.in/2018/04/23/add-caching-to-spring-boot/)
 * [Rédiger des spécifications - La syntaxe Gherkin](https://github.com/Behat/fr-docs.behat.org/blob/master/guides/1.gherkin.rst)
-* [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)
-to see
+* [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)  
+to see  
 https://univers-architecture.com/2017/12/11/tutoriel-integration-de-cucumber-avec-spring-boot/
 
