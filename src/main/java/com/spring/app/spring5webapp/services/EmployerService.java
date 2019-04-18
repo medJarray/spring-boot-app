@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface EmployerService {
 
-    List<EmployerElement> getAllEmployer();
+    List<EmployerElement> getAllEmployer() throws InterruptedException;
 
     Optional<Employer> getEmployerByName(String name);
 
