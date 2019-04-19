@@ -5,9 +5,7 @@
 [![BCH compliance](https://bettercodehub.com/edge/badge/Raouf25/Spring-Boot-Web-App?branch=master)](https://bettercodehub.com/)
 [![codecov](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App/branch/master/graph/badge.svg)](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App)
 
-
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
-
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Raouf25_Spring-Boot-Web-App)](https://sonarcloud.io/dashboard?id=Raouf25_Spring-Boot-Web-App)
 
 ## Why I should use DTOs in your REST API
 
