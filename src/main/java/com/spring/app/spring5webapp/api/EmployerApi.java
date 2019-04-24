@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 public interface EmployerApi {
@@ -24,7 +25,7 @@ public interface EmployerApi {
     @PostMapping(value = ApiEndpoints.EMPLOYERS,
             produces = {"application/json"},
             consumes = {"application/json"})
-    ResponseEntity<EmployerElement> createEmployer(@ApiParam(value = "", required = true) @RequestBody CreateEmployer employerToCreate);
+    ResponseEntity<EmployerElement> createEmployer(@ApiParam(value = "Ludo", required = true) @Valid @RequestBody CreateEmployer employerToCreate);
 
     @ApiOperation(value = "Get list of all employers.", notes = "The list is paginated. You can provide a page number (default 0) and a page size (default 100)")
     @GetMapping(value = ApiEndpoints.EMPLOYERS, produces = "application/json")

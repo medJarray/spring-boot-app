@@ -27,6 +27,25 @@ You won't need to map your persistence entities to DTOs and vice versa manually.
 Also consider Lombok to generate getters, setters, equals(), hashcode() and toString() methods for you.
 
 
+## Why use validation JRS-303 with Spring Boot ?
+JSR-303 bean validation has become the validation standard in the Java world. Bean validation API provides an object level constraint declaration and validation facility for the Java application developer, and a constraint metadata repository and query API. Spring bean validation allows us to use these bean validation constraint directly on the Java beans. There are several benefits of this approach
+
+1. No need for separate validation configurations.
+2. Constraints are straight on the domain models.
+```console
+$ curl -X POST "http://localhost:8090/api/employers" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"firstName\": null, \"lastName\": \"Mario\", \"matricule\": \"Mat-2015632\"}" 
+```
+```json
+{
+	"status": "400 BAD_REQUEST",
+	"error": "FORM_VALIDATION_ERROR",
+	"message": "1 error(s) found while trying to validate form",
+	"details": {
+		"firstName": ["must not be blank"]
+	}
+}
+```
+
 ## Documenting REST API with Swagger
 
 To properly document the available endpoints in your REST API, which endpoints there are, what they can do, what they need as input parameters and what they will provide as output. A popular standard, that is used for this, is Swagger.

@@ -12,11 +12,13 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +46,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = EmployerApi.class)
+@Import(ConfigUnitTest.class)
 public class EmployerApiTest {
 
     @MockBean
@@ -54,6 +57,28 @@ public class EmployerApiTest {
 
     @Autowired
     protected ObjectMapper jsonMapper;
+
+
+    @Test
+    public void shouldNotCreateAnEmployerWhenConstraintViolation() throws Exception {
+        CreateEmployer employerToCreated = new CreateEmployer();
+
+        String employerToCreateAsJson = jsonMapper.writerWithDefaultPrettyPrinter().writeValueAsString(employerToCreated);
+
+        mockMvc.perform(
+                post(ApiEndpoints.EMPLOYERS)
+                        .accept(MediaType.APPLICATION_JSON_VALUE)
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content(employerToCreateAsJson))
+               .andExpect(status().isBadRequest())
+               .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+               .andExpect(jsonPath("$.error").value("FORM_VALIDATION_ERROR"))
+               .andExpect(jsonPath("$.message").value("3 error(s) found while trying to validate form"))
+               .andExpect(jsonPath("$.details.lastName").value("must not be blank"))
+               .andExpect(jsonPath("$.details.firstName").value("must not be blank"))
+               .andExpect(jsonPath("$.details.matricule").value("must not be blank"))
+               .andDo(MockMvcResultHandlers.print());
+    }
 
 
     @Test
