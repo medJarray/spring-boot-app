@@ -1,17 +1,23 @@
 package com.spring.app.spring5webapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
 
 @Data
+@Wither
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"employer"})
+@ToString(exclude = {"employer"})
 @Entity
 @Table(name = "TicketApi")
 public class Ticket {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "descriptif")
     private String descriptif;
@@ -25,28 +31,11 @@ public class Ticket {
     private String typeIntervention;
 
     @JsonIgnore
-    @ManyToOne
-    @JoinTable(name = "Employeur_Ticket", joinColumns = @JoinColumn(name = "employeur_matricule"),
-            inverseJoinColumns = @JoinColumn(name = "ticket_id"))
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "Employer_Ticket",
+            joinColumns = @JoinColumn(name = "Ticket_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "employer_id"))
+//    @JoinColumn(name ="FK_MainMenuId")
+//    https://stackoverflow.com/a/30292348/8956678
     private Employer employer;
-
-    public Ticket() {
-    }
-
-    public Ticket(String descriptif, String perimetre, float tempsTraitement, boolean isClos) {
-        this.descriptif = descriptif;
-        this.perimetre = perimetre;
-        this.tempsTraitement = tempsTraitement;
-        this.isClos = isClos;
-    }
-
-
-    public Ticket(String descriptif, String perimetre, float tempsTraitement, boolean isClos, String typeIntervention) {
-        this.descriptif = descriptif;
-        this.perimetre = perimetre;
-        this.tempsTraitement = tempsTraitement;
-        this.isClos = isClos;
-        this.typeIntervention = typeIntervention;
-    }
-
 }

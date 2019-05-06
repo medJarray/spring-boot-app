@@ -1,18 +1,24 @@
 package com.spring.app.spring5webapp.entity;
 
-import lombok.Data;
+import lombok.*;
+import lombok.experimental.Wither;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
+@Wither
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 @Entity
 @Table(name = "Employer")
 public class Employer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "firstName")
     private String firstName;
@@ -20,20 +26,24 @@ public class Employer {
     private String lastName;
     @Column(name = "matricule")
     private String matricule;
-    @Column(name = "nbrTicket")
-    private int nbrTicketEnCharge;
 
-    @OneToMany(mappedBy = "employer")
-    private List<Ticket> listeTicket = new ArrayList<>();
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private Set<Ticket> tickets = new HashSet<>();
 
-    public Employer() {
+    public Ticket addTicket(Ticket ticket) {
+        if (getTickets() == null) {
+            tickets = new HashSet<>();
+        }
+        getTickets().add(ticket);
+        ticket.setEmployer(this);
+        return ticket;
     }
 
-    public Employer(String firstName, String lastName, String matricule, int nbrTicketEnCharge) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.matricule = matricule;
-        this.nbrTicketEnCharge = nbrTicketEnCharge;
+    public Ticket removeTicket(Ticket ticket) {
+        getTickets().remove(ticket);
+        ticket.setEmployer(null);
+        return ticket;
     }
+
 
 }

@@ -1,13 +1,11 @@
 
 # Spring-Boot-Web-App
 
-[![Build Status](https://travis-ci.org/medJarray/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/medJarray/Spring-Boot-Web-App)
+[![Build Status](https://travis-ci.org/Raouf25/Spring-Boot-Web-App.svg?branch=master)](https://travis-ci.org/Raouf25/Spring-Boot-Web-App)
 [![BCH compliance](https://bettercodehub.com/edge/badge/Raouf25/Spring-Boot-Web-App?branch=master)](https://bettercodehub.com/)
 [![codecov](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App/branch/master/graph/badge.svg)](https://codecov.io/gh/Raouf25/Spring-Boot-Web-App)
 
-
-[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=com.springApp%3Aspring5webapp)](https://sonarcloud.io/dashboard?id=com.springApp%3Aspring5webapp)
-
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Raouf25_Spring-Boot-Web-App)](https://sonarcloud.io/dashboard?id=Raouf25_Spring-Boot-Web-App)
 
 ## Why I should use DTOs in your REST API
 
@@ -28,6 +26,25 @@ You won't need to map your persistence entities to DTOs and vice versa manually.
 
 Also consider Lombok to generate getters, setters, equals(), hashcode() and toString() methods for you.
 
+
+## Why use validation JRS-303 with Spring Boot ?
+JSR-303 bean validation has become the validation standard in the Java world. Bean validation API provides an object level constraint declaration and validation facility for the Java application developer, and a constraint metadata repository and query API. Spring bean validation allows us to use these bean validation constraint directly on the Java beans. There are several benefits of this approach
+
+1. No need for separate validation configurations.
+2. Constraints are straight on the domain models.
+```console
+$ curl -X POST "http://localhost:8090/api/employers" -H "accept: application/json" -H "Content-Type: application/json" -d "{ \"firstName\": null, \"lastName\": \"Mario\", \"matricule\": \"Mat-2015632\"}" 
+```
+```json
+{
+	"status": "400 BAD_REQUEST",
+	"error": "FORM_VALIDATION_ERROR",
+	"message": "1 error(s) found while trying to validate form",
+	"details": {
+		"firstName": ["must not be blank"]
+	}
+}
+```
 
 ## Documenting REST API with Swagger
 
@@ -55,12 +72,23 @@ On peut pas trouver l emplyeur toto
 ```
 So as you see, responses are different based on value of “Accept-Language” header passed in the request. This way, we don’t need to check what was passed in the request in each controller method, and then pass it further to service layers. We now can do this in one single place, which is CustomLocaleResolver class.
 
+## Spring Boot & performance
+when you execut GET request to our find all users endpoint, you’ll get next result:
 
+![ScreenShot](src/main/resources/screen-shot/cache1.jpg)
+
+So, it takes about 3325 milliseconds to get all users. And this is an horrible scenario for real use case !!  
+So here Spring Cache can solve our issue!   
+Now when you restarted the server and make GET request to fetch all users — first time it will take those 3 with something seconds to get data back to you. Because firstly it will check the cache, and will see that it is empty, and will execute the method, with 3 seconds delay. But all further requests to findAll() will be executed much much faster, because method will not be executed, since requested data was cached previously and will be taken for you from the cache.
+
+![ScreenShot](src/main/resources/screen-shot/cache2.jpg)
+
+As you see, the request execution time is much less, than before. It’s simply because the method findAll() is not executed, since the data is already in cache, that’s why it works so fast
 
 ## Behaviour-Driven Development methodology
 Behavior-Driven Development aka BDD, its intent is to enable developers to write high-level use cases in plain text that can be verified by non-technical stakeholders, and turn them into executable tests, written in a language called Gherkin.
 
-![img](src/main/resources/screen-shot/bdd.jpg "Title")
+![img3](src/main/resources/screen-shot/bdd.jpg "Title")
 
 just 5 step recipe for making it work :
 1. Configure the build script
@@ -72,10 +100,12 @@ just 5 step recipe for making it work :
 Results of test are saved in : target/cucumber-reports/index.html
 
 ### References: 
+* [Spring Boot REST Internationalization](https://blog.usejournal.com/spring-boot-rest-internationalization-9ab3fce2489)
 * [REST API - DTOs or not?](https://stackoverflow.com/a/36175349/8956678)
 * [Automatically Mapping DTO to Entity on Spring Boot APIs](https://auth0.com/blog/automatically-mapping-dto-to-entity-on-spring-boot-apis)
+* [How To: Add caching support to your Spring Boot application](https://dev-journal.in/2018/04/23/add-caching-to-spring-boot/)
 * [Rédiger des spécifications - La syntaxe Gherkin](https://github.com/Behat/fr-docs.behat.org/blob/master/guides/1.gherkin.rst)
-* [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)
-to see
+* [Spring Boot 1.4: Gherkin tests](https://moelholm.com/2016/10/15/spring-boot-1-4-gherkin-tests/)  
+to see  
 https://univers-architecture.com/2017/12/11/tutoriel-integration-de-cucumber-avec-spring-boot/
 

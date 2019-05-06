@@ -5,16 +5,18 @@ import com.spring.app.spring5webapp.api.controllers.exception.EmployerNotFoundEx
 import com.spring.app.spring5webapp.model.CreateEmployer;
 import com.spring.app.spring5webapp.model.EmployerElement;
 import com.spring.app.spring5webapp.services.EmployerService;
+import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -28,19 +30,15 @@ public class EmployerController implements EmployerApi {
 
 
     @Override
-    public ResponseEntity<EmployerElement> createEmployer(CreateEmployer employerToCreate) {
+    public ResponseEntity<EmployerElement> createEmployer(@ApiParam(value = "Ludo", required = true) @Valid @RequestBody CreateEmployer employerToCreate) {
         EmployerElement employer = employerService.createEmployer(employerToCreate);
-        return new ResponseEntity(employer, null, HttpStatus.CREATED);
+        return ResponseEntity.status(HttpStatus.CREATED).body(employer);
     }
 
-    public ResponseEntity<List<EmployerElement>> getAllEmployers() {
+    public ResponseEntity<List<EmployerElement>> getAllEmployers() throws InterruptedException {
         List<EmployerElement> allEmployer = employerService.getAllEmployer();
+        return new ResponseEntity(allEmployer, null, allEmployer.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.OK);
 
-        if (CollectionUtils.isEmpty(allEmployer)) {
-            return new ResponseEntity(allEmployer, null, HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity(allEmployer, null, HttpStatus.OK);
-        }
     }
 
     public ResponseEntity<EmployerElement> getEmployerByName(@RequestParam("name") String name) {
