@@ -3,6 +3,7 @@ package com.spring.app.spring5webapp.common;
 public final class ApiEndpoints {
 
     public static final String EMPLOYERS = "/employers";
+    public static final String EMPLOYERS_DOWNLOAD = "/employers/extraction";
     public static final String EMPLOYERS_SEARCH_BY_NAME = "/employers/search";
 
     public static final String TICKETS = "/tickets";
